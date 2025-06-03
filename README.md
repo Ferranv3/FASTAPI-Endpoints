@@ -1,4 +1,5 @@
 # FAST API Endpoints
+![Build Status](https://github.com/Ferranv3/FASTAPI-Endpoints/actions/workflows/ci.yml/badge.svg?branch=main)
 
 This project uses FastAPI to create some endpoints. Below are the steps to set up the environment and necessary dependencies.
 

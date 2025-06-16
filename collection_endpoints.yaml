@@ -5,7 +5,7 @@ meta:
   created: 1748976012649
   modified: 1748976023796
 collection:
-  - url: http://localhost:8000/orders?language=es&id=1
+  - url: http://localhost:8000/api/v1/orders?language=es&id=1
     name: Get orders
     meta:
       id: req_e889706c1a2d49b786f69b5c4f492a61
@@ -27,7 +27,7 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: http://localhost:8000/orderItems?language=es&id=1
+  - url: http://localhost:8000/api/v1/orderItems?language=es&id=1
     name: Get order_items
     meta:
       id: req_6d49e758a309480b913afbeab191c80d
@@ -49,7 +49,7 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: http://localhost:8000/products?language=es&id=1
+  - url: http://localhost:8000/api/v1/products?language=es&id=1
     name: Get products
     meta:
       id: req_0a8ffafbfb374745ad75816219bffad5
@@ -71,7 +71,7 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: http://localhost:8000/categories?language=es&id=1
+  - url: http://localhost:8000/api/v1/categories?language=es&id=1
     name: Get categories
     meta:
       id: req_57960f7378ba4c4a935978b11893c6b0
@@ -93,7 +93,7 @@ collection:
         send: true
         store: true
       rebuildPath: true
-  - url: http://localhost:8000/users?language=es&id=1
+  - url: http://localhost:8000/api/v1/users?language=es&id=1
     name: Get users
     meta:
       id: req_433b8fa970784ec7939641eed5fc20de

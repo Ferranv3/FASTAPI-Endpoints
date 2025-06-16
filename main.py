@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
 from database import database
 from routers import categories, order_items, orders, products, users
 
@@ -8,11 +8,14 @@ app = FastAPI(
     version="1.0.0"
 )
 
-app.include_router(products.router)
-app.include_router(orders.router)
-app.include_router(users.router)
-app.include_router(order_items.router)
-app.include_router(categories.router)
+api_v1 = APIRouter(prefix="/api/v1")
+api_v1.include_router(products.router)
+api_v1.include_router(orders.router)
+api_v1.include_router(users.router)
+api_v1.include_router(order_items.router)
+api_v1.include_router(categories.router)
+
+app.include_router(api_v1)
 
 @app.on_event("startup")
 async def startup():

@@ -1,40 +1,23 @@
-from fastapi import APIRouter, Query, HTTPException
+from fastapi import APIRouter, HTTPException, Query
 from typing import Optional
-from database import database
+
 from schemas.schemas import UsersResponse
+from services.users_service import get_users
 
 router = APIRouter(
     prefix="/users",
     tags=["users"]
 )
 
-@router.get("", response_model = UsersResponse)
-async def get_users(language: str = Query(..., description='Idioma ("es" o "en")'),
-                          email: Optional[str] = Query(None),
-                          id: Optional[int] = Query(None)):
-    
-    if language not in ["es", "en"]:
-        raise HTTPException(status_code=400, detail="Idioma no válido")
+@router.get("", response_model=UsersResponse)
+async def get_users_endpoint(
+    language: str = Query(..., description='Idioma ("es" o "en")'),
+    email: Optional[str] = Query(None),
+    id: Optional[int] = Query(None),
+) -> UsersResponse:
+    """List users via the service layer."""
+    try:
+        return await get_users(language, email=email, id=id)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
 
-    query = "SELECT * FROM users"
-    conditions = []
-    params = {}
-
-    if email:
-        conditions.append("email = :email")
-        params["email"] = email
-    
-    if id:
-        conditions.append("id = :id")
-        params["id"] = id
-
-    if conditions:
-        query += " WHERE " + " AND ".join(conditions)
-
-    print("Query: " + query)
-    print(f"Params: {params}")
-    
-    rows = await database.fetch_all(query, params)
-    
-    print(f"Rows: {rows}")
-    return {"total": len(rows), "users": rows}
